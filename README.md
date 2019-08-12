@@ -1,6 +1,7 @@
 # MyCapstoneProject
 
 PillSchedule is a medicine tracker app that helps users to keep track of their medicine intake. 
+
 The app has an uncomplicated and efficient user interface, where the user can record the name, quantity and type of medicine taken and the
 app automaticaly store the date of when the data was stored in the SQLite database.
 
