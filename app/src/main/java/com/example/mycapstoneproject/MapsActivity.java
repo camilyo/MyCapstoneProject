@@ -1,5 +1,6 @@
 package com.example.mycapstoneproject;
 
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,6 +43,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -77,6 +80,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
 
+
+
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
@@ -90,8 +96,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapView = mapFragment.getView();
 
 
+
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MapsActivity.this);
-        Places.initialize(MapsActivity.this, "AIzaSyAGtvABKMg_peK-aJ5S3i7oLwlxLeyf_1U");
+        Places.initialize(MapsActivity.this, "AIzaSyCZFnpiDTSg3epDdILHFP01Q3UVQLcFxSg");
         placesClient = Places.createClient(this);
         final AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();
 
@@ -147,7 +154,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 FindAutocompletePredictionsRequest predictionsRequest = FindAutocompletePredictionsRequest.builder()
-                        .setCountry("us")
+                     //   .setCountry("us")
                         .setTypeFilter(TypeFilter.ADDRESS)
                         .setSessionToken(token)
                         .setQuery(s.toString())
@@ -219,7 +226,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 FetchPlaceRequest fetchPlaceRequest = FetchPlaceRequest.builder(placeId, placeFields).build();
                 placesClient.fetchPlace(fetchPlaceRequest).addOnSuccessListener(new OnSuccessListener<FetchPlaceResponse>() {
 
-                    @Override
+
                     public void onSuccess(FetchPlaceResponse fetchPlaceResponse) {
                         Place place = fetchPlaceResponse.getPlace();
                         Log.i("mytag", "Place found: " + place.getName());
@@ -324,6 +331,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -334,8 +342,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    @SuppressLint("MissingPermission")
+   // @SuppressLint("MissingPermission")
     private void getDeviceLocation() {
+
         mFusedLocationProviderClient.getLastLocation()
                 .addOnCompleteListener(new OnCompleteListener<Location>() {
                     @Override
