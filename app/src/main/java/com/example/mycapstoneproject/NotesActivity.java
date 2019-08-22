@@ -145,8 +145,7 @@ public class NotesActivity extends AppCompatActivity {
         // get the newly inserted note from db
         Note n = db.getNote(id);
 
-        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-        String timestamp = currentDateTimeString;
+
 
 
 
